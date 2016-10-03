@@ -280,4 +280,4 @@ See http://stackoverflow.com/questions/17918117/rails-4-datatypes
 
 * `rake db:schema:load` - setup the database structure using schema.rb (may be faster when you have hundreds of migrations)
 * `rake db:setup` - similar to `rake db:create db:migrate db:seed`
-* rake db:drop - destroy the database (if you run this in production you're FIRED!)
+* `rake db:drop` - destroy the database (if you run this in production you're FIRED!)
