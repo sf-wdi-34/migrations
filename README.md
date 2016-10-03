@@ -275,6 +275,60 @@ See http://stackoverflow.com/questions/17918117/rails-4-datatypes
 
 > Note: prefer datetime unless you have a specific reason to use one of the others.  ActiveRecord has extra tools for datetime
 
+### Bonus - default values, constraints and indexes
+
+There are a few other things you can do with migrations, including:
+
+* setting a default value for a field (admin: false) (accepted_eula: false)
+* making a field required by preventing NULL (require that a user have a name)
+* creating indexes to speed up search
+
+Let's look at how we can do this.
+
+#### Default values
+
+We can set a database rule that will make a default value for a particular attribute (if it is unfilled).
+
+```rb
+class AddEulaAcceptedToUsers < ActiveRecord::Migration[5.0]
+  def change
+    add_column :users, :eula_accepted, :boolean, default: false
+  end
+end
+```
+
+
+#### Required fields
+
+We can set a database rule that requires an attribute to NOT be null.
+
+```rb
+class RequireUserName < ActiveRecord::Migration[5.0]
+  def change
+    change_column :users, :name, :string, null: false
+  end
+end
+```
+
+> Note: this sets it in the DB, but doesn't work well with `model.valid?`.  There are business reasons for doing this (perhaps your database is used by another app as well) but it may also be ideal to use Model Validations.
+
+Later you'll look at **model validations** which may be a better way to set default values and required fields.
+
+#### Indexes
+
+Indexing columns you frequently search for records on will greatly increase the speed at which the database can search those columns.  With many users performing queries, this can save your response times.
+
+```rb
+class AddIndexToUserName < ActiveRecord::Migration[5.0]
+  def change
+    add_index :users, :name
+  end
+end
+```
+
+Also you can generate indexes when creating columns: `$ bin/rails generate migration AddPartNumberToProducts part_number:string:index`
+
+> What algorithm do you suppose is used for indexing?
 
 ### Other commands
 
