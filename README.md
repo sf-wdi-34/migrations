@@ -1,5 +1,5 @@
 <!--
-Creator: Team editing by Cory and Travis
+Creator: Team, editing by Cory and Travis
 Market: SF
 -->
 
@@ -36,7 +36,7 @@ Migrations are the history of commands that have adjusted your DB to bring it to
   * We cannot know the database table structures precisely when we begin the app.
   * The structure changes as business needs evolve.
   * We must not damage or lose production database records.
-* Then we must make small changes to the database structure over time, .
+* Then we must make small changes to the database structure over time.
 
 Migrations give us the ability to make small and incremental changes to our database and to make those same changes to one or more production datasets.  
 
@@ -54,7 +54,7 @@ The above command, you'll recall, creates 2 new files.
 
 Typically we'll edit both of these files as needed to get the database structure we want and set any validations we want to run in the model.
 
-Finally you of course must run `rake db:migrate`.  When you run rake `db:migrate` it alters the `schema.rb` file.  Then you commit the above files as well as the `db/schema.rb` file.
+Finally you of course must run `rake db:migrate`.  When you run `rake db:migrate` it alters the `schema.rb` file.  Then you commit the above files as well as the `db/schema.rb` file.
 
 >Note: Never directly edit schema.rb
 
@@ -69,10 +69,10 @@ Let's say we're building a website to sell used cars.  We know we need a few bas
 Let's write a migration to track these on a new **Car** model.  But first create a new rails app; from the directory you do your wdi work in:
 
 ```
-$ rails new practice -T -d=postgresql
+$ rails new practice -T -d postgresql
 ```
 
-(Of course you should CD into this app.)
+(Of course you should change directories to navigate into this app.)
 >We are using the -T (aka --skip-test-unit) and -d postgresql (aka --database=postgresql) options today -- postgresql is our preferred database. We'll talk about tests another day.
 
 <details><summary>What's the command to generate the new car model and migration?  Use make, model, and year as column names.</summary>
@@ -98,11 +98,11 @@ end
 ```
 
 <details>
-<summary>After generating this, what do we need to run?</summary>
+<summary>After generating this, what command will make the migration take hold on `schema.rb`?</summary>
 `rake db:migrate`
 </details>
 
-This will also change the file `db/schema.rb` updating it to include the new table structure.
+This will change the file `db/schema.rb` updating it to include the new table structure.
 
 Afterwards you should commit your changes before moving on to work with this table.
 
@@ -210,7 +210,7 @@ Providing a step parameter allows us to rollback a specific number of migrations
 
 You can also use the date stamp on the migrations to migrate (up or down) to a specific version:
 
-`rake db:migrate VERSION=20080906120000`
+`rake db:migrate VERSION=20170123201707`
 
 #### Practice 3
 
@@ -266,14 +266,14 @@ Basic list:
 * :time
 * :timestamp
 
-See http://stackoverflow.com/questions/17918117/rails-4-datatypes
+See [this stack overflow post.](http://stackoverflow.com/questions/17918117/rails-4-datatypes)
 
 
-> Note: 90% of the time prefer *decimal* over *float* [2][2]
+> Note: 90% of the time [prefer *decimal* over *float*](http://stackoverflow.com/questions/8514167/float-vs-decimal-in-activerecord)
 
-> Note: Prefer *text* over *string* if on postgresql (maybe).  Otherwise prefer *string* over *text* when your data is definitely always less than 255.  [3][3]
+> Note: [Prefer *text* over *string* if on postgresql (maybe).  Otherwise prefer *string* over *text* when your data is definitely always less than 255 characters.](http://stackoverflow.com/questions/3354330/difference-between-string-and-text-in-rails)
 
-> Note: prefer datetime unless you have a specific reason to use one of the others.  ActiveRecord has extra tools for datetime
+> Note: prefer datetime unless you have a specific reason to use one of the others.  ActiveRecord has extra tools for datetime.
 
 ### Bonus - default values, constraints and indexes
 
@@ -335,3 +335,16 @@ Also you can generate indexes when creating columns: `$ bin/rails generate migra
 * `rake db:schema:load` - setup the database structure using schema.rb (may be faster when you have hundreds of migrations)
 * `rake db:setup` - similar to `rake db:create db:migrate db:seed`
 * `rake db:drop` - destroy the database (if you run this in production you're FIRED!)
+
+###Independent Practice
+
+Generate a rails app that will help an aquarium keep track of the animals they take care of.
+
+1. Create a new rails app.
+2. Create a model for fish with `species`, `name`, and `age` attributes. `species` and `name` should be a string, `age` should be an integer. `species` should be required, but `name` and `age` should have default values of "unnamed" and "-1" respectively.
+2. Migrate the above model to the database to create a table and use the Rails console to test whether the model behaves properly. Can you save new fish?
+3. Create a model for caretakers  with `name`, `department`, and `access` attributes, which are all strings.
+4. Migrate the above model to the database to create its table and use the Rails console to test whether the model behaves properly. Can you save new caretakers?
+5. Aquarium caretakers start to tag each fish so that you can identify them. Add a `tag` column to the database string to keep track of the tag ids. Next, add a `healthy` column to hold a boolean for each fish. The default value should be true.
+6. You change access levels of your caretakers to a 2 level system. Trainees and interns can't access the computer system, but all other employees can. A boolean is a much better representation for this new system. Change the `access` column to have a type `boolean` instead of string and a default value of `false`.
+7.
