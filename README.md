@@ -338,13 +338,18 @@ Also you can generate indexes when creating columns: `$ bin/rails generate migra
 
 ###Independent Practice
 
-Generate a rails app that will help an aquarium keep track of the animals they take care of.
+Generate a rails app that will help an aquarium keep track of the animals they take care of. Between each step, run the migration and test your work.
 
 1. Create a new rails app.
-2. Create a model for fish with `species`, `name`, and `age` attributes. `species` and `name` should be a string, `age` should be an integer. `species` should be required, but `name` and `age` should have default values of "unnamed" and "-1" respectively.
+2. Create a model for fish with `species`, `name`, and `age` attributes. `species` and `name` should be strings, `age` should be an integer. `species` should be required, but `name` and `age` should have default values of "unnamed" and "-1" respectively.
 2. Migrate the above model to the database to create a table and use the Rails console to test whether the model behaves properly. Can you save new fish?
 3. Create a model for caretakers  with `name`, `department`, and `access` attributes, which are all strings.
 4. Migrate the above model to the database to create its table and use the Rails console to test whether the model behaves properly. Can you save new caretakers?
 5. Aquarium caretakers start to tag each fish so that you can identify them. Add a `tag` column to the database string to keep track of the tag ids. Next, add a `healthy` column to hold a boolean for each fish. The default value should be true.
-6. You change access levels of your caretakers to a 2 level system. Trainees and interns can't access the computer system, but all other employees can. A boolean is a much better representation for this new system. Change the `access` column to have a type `boolean` instead of string and a default value of `false`.
-7.
+6. You change computer access levels of your caretakers to a 2 level system. Trainees and interns can't access the computer system, but all other employees can. A boolean is a much better representation for this new system. Change the `access` column to have a type `boolean` instead of string and a default value of `false`.
+7. As you are creating the feeding schedule, you realize that it's going to be essential to have `diet` information stored for each fish. In your fish table, make a required `diet` column that takes in long blocks of text. Because this is going to be accessed multiple times daily by all of the caretakers, add an index to this column.
+8. Think of 3 more changes you could make to this database and implement them in new migrations. Push yourself to make big changes or prepare yourself for real world changes you might need to make in apps you will create.
+
+###Outside Resources
+
+[Rails guide to migrations](http://guides.rubyonrails.org/active_record_migrations.html)
