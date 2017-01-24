@@ -30,7 +30,7 @@ Migrations are the history of commands that have adjusted your DB to bring it to
 
 ## Migrations
 
-> Definition: In software engineering, schema migration (also database migration, database change management) refers to the management of incremental, reversible changes to relational database schemas. A schema migration is performed on a database whenever it is necessary to update or revert that database's schema to some newer or older version. [1][1]
+> Definition: In software engineering, schema migration (also database migration, database change management) refers to the management of incremental, reversible changes to relational database schemas. A schema migration is performed on a database whenever it is necessary to update or revert that database's schema to some newer or older version. [source](https://en.wikipedia.org/wiki/Schema_migration)
 
 * Given that:
   * We cannot know the database table structures precisely when we begin the app.
