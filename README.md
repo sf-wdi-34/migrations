@@ -330,6 +330,23 @@ Also you can generate indexes when creating columns: `$ bin/rails generate migra
 
 > What algorithm do you suppose is used for indexing?
 
+### Important Migration Commands
+
+Command line:
+
+* rake db:migrate
+* rake db:rollback
+* rails g migration AddXXXToYYY
+* rails g migration RemoveXXXToYYY
+* rails g migration NNN
+
+Migrations:
+
+* `add_column :table, :column, :type, :options`
+* `remove_column :table, :column, :type, :options`
+* `change_column :table, :column, :new_type, :options`
+* `rename_column :table, :column, :new_name`
+
 ### Other commands
 
 * `rake db:schema:load` - setup the database structure using schema.rb (may be faster when you have hundreds of migrations)
@@ -347,9 +364,12 @@ Generate a rails app that will help an aquarium keep track of the animals they t
 4. Migrate the above model to the database to create its table and use the Rails console to test whether the model behaves properly. Can you save new caretakers?
 5. Aquarium caretakers start to tag each fish so that you can identify them. Add a `tag` column to the database string to keep track of the tag ids. Next, add a `healthy` column to hold a boolean for each fish. The default value should be true.
 6. You change computer access levels of your caretakers to a 2 level system. Trainees and interns can't access the computer system, but all other employees can. A boolean is a much better representation for this new system. Change the `access` column to have a type `boolean` instead of string and a default value of `false`.
-7. As you are creating the feeding schedule, you realize that it's going to be essential to have `diet` information stored for each fish. In your fish table, make a required `diet` column that takes in long blocks of text. Because this is going to be accessed multiple times daily by all of the caretakers, add an index to this column.
+7. As you are creating a feeding schedule, you realize that it's going to be essential to have `diet` information stored for each fish. In your fish table, make a required `diet` column that takes in long blocks of text. Because this is going to be accessed multiple times daily by all of the caretakers, add an index to this column.
 8. Think of 3 more changes you could make to this database and implement them in new migrations. Push yourself to make big changes or prepare yourself for real world changes you might need to make in apps you will create.
 
 ###Outside Resources
 
+[More practice](https://github.com/sf-wdi-31/rails-migrations-practice/blob/master/README.md)
+
 [Rails guide to migrations](http://guides.rubyonrails.org/active_record_migrations.html)
+[Migrations Documentation](http://api.rubyonrails.org/classes/ActiveRecord/Migration.html)
